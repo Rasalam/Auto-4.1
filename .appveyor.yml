@@ -9,10 +9,9 @@ branches:
 build: off  # будем использовать свой скрипт сборки
 
 install:
-  - ./gradlew test --info
+  - chmod +x gradlew
   - java -jar ./artifacts/app-card-delivery.jar &
 
 build_script:
-  - chmod +x gradlew
   - ./gradlew test -Dselenide.headless=true
   - ./gradlew test --info
