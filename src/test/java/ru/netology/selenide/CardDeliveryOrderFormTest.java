@@ -124,7 +124,7 @@ public class CardDeliveryOrderFormTest {
                 .shouldHave(exactText("Поле обязательно для заполнения"));
     }
 
-    @Test                                               // Поле Телефон не заполнено
+    @Test                                               // Согласие с условиями не получено
     public void shouldShowMassageIfCheckBoxIsNotCheck() {
         String actualDate = dateSetUp(3);
         $("[data-test-id=city] input").setValue("Волгоград");
