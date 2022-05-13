@@ -25,7 +25,7 @@ public class CardDeliveryOrderFormDateTest {
     }
 
     @Test                                                           // Дата встечи меньше требуемой на 2 дня
-    public void shouldShowMassageIfDateIsInTwoDaysLess() {
+    public void shouldShowMassageIfDateIsTwoDaysLess() {
         String actualDate = dateSetUp(1);
         $("[data-test-id=city] input").setValue("Волгоград");
         $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
@@ -34,11 +34,12 @@ public class CardDeliveryOrderFormDateTest {
         $("[data-test-id=phone] input").setValue("+70000000000");
         $("[data-test-id=agreement]").click();
         $(byText("Забронировать")).click();
-        $("div:nth-child(2) > span > span > span > span > span.input__sub").shouldHave(exactText("Заказ на выбранную дату невозможен"));
+        $("[data-test-id=date] span.input_invalid span.input__sub")
+                .shouldHave(exactText("Заказ на выбранную дату невозможен"));
     }
 
     @Test                                                           // Дата встечи меньше требуемой на 1 день
-    public void shouldShowMassageIfDateIsInOneDaysLess() {
+    public void shouldShowMassageIfDateIsOneDaysLess() {
         String actualDate = dateSetUp(2);
         $("[data-test-id=city] input").setValue("Волгоград");
         $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
@@ -47,7 +48,8 @@ public class CardDeliveryOrderFormDateTest {
         $("[data-test-id=phone] input").setValue("+70000000000");
         $("[data-test-id=agreement]").click();
         $(byText("Забронировать")).click();
-        $("div:nth-child(2) > span > span > span > span > span.input__sub").shouldHave(exactText("Заказ на выбранную дату невозможен"));
+        $("[data-test-id=date] span.input_invalid span.input__sub")
+                .shouldHave(exactText("Заказ на выбранную дату невозможен"));
     }
 
 
@@ -60,7 +62,8 @@ public class CardDeliveryOrderFormDateTest {
         $("[data-test-id=phone] input").setValue("+70000000000");
         $("[data-test-id=agreement]").click();
         $(byText("Забронировать")).click();
-        $("div:nth-child(2) > span > span > span > span > span.input__sub").shouldHave(exactText("Неверно введена дата"));
+        $("[data-test-id=date] span.input_invalid span.input__sub")
+                .shouldHave(exactText("Неверно введена дата"));
     }
 
     @Test                                                           // Дата встечи не указана
@@ -71,7 +74,8 @@ public class CardDeliveryOrderFormDateTest {
         $("[data-test-id=phone] input").setValue("+70000000000");
         $("[data-test-id=agreement]").click();
         $(byText("Забронировать")).click();
-        $("div:nth-child(2) > span > span > span > span > span.input__sub").shouldHave(exactText("Неверно введена дата"));
+        $("[data-test-id=date] span.input_invalid span.input__sub")
+                .shouldHave(exactText("Неверно введена дата"));
     }
 
 }
