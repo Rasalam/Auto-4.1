@@ -1,10 +1,8 @@
 package ru.netology.selenide;
 
 import org.junit.jupiter.api.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
