@@ -2,13 +2,12 @@ package ru.netology.selenide;
 
 import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.*;
-
+import org.openqa.selenium.Keys;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -30,21 +29,22 @@ public class CardDeliveryOrderFormTest {
     public void shouldReturnSuccess() {
         String actualDate = dateSetUp(3);
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("Иванов Иван");
         $("[data-test-id=phone] input").setValue("+70000000000");
         $("[data-test-id=agreement]").click();
         $(byText("Забронировать")).click();
-        $(withText("Встреча успешно забронирована на"))
-                .shouldBe(Condition.visible, Duration.ofSeconds(15));
+        // $(withText("Встреча успешно забронирована на")).shouldBe(Condition.visible, Duration.ofSeconds(15));
+        $(".notification__content")
+                .shouldHave(Condition.text("Встреча успешно забронирована на " + actualDate), Duration.ofSeconds(15));
     }
 
     @Test                                               // Поле Город заполнено некорректно
     public void shouldShowMassageIfCityIsInvalid() {
         String actualDate = dateSetUp(3);
         $("[data-test-id=city] input").setValue("Малые Васюки");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("Иванов Иван");
         $("[data-test-id=phone] input").setValue("+70000000000");
@@ -58,7 +58,7 @@ public class CardDeliveryOrderFormTest {
     public void shouldShowMassageIfCityIsEmpty() {
         String actualDate = dateSetUp(3);
         $("[data-test-id=city] input").setValue("");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("Иванов Иван");
         $("[data-test-id=phone] input").setValue("+70000000000");
@@ -72,7 +72,7 @@ public class CardDeliveryOrderFormTest {
     public void shouldShowMassageIfNameIsInvalid() {
         String actualDate = dateSetUp(3);
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("No Name");
         $("[data-test-id=phone] input").setValue("+70000000000");
@@ -86,7 +86,7 @@ public class CardDeliveryOrderFormTest {
     public void shouldShowMassageIfNameIsEmpty() {
         String actualDate = dateSetUp(3);
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("");
         $("[data-test-id=phone] input").setValue("+70000000000");
@@ -100,7 +100,7 @@ public class CardDeliveryOrderFormTest {
     public void shouldShowMassageIfPhoneIsInvalid() {
         String actualDate = dateSetUp(3);
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("Иван Иванович");
         $("[data-test-id=phone] input").setValue("+7917330443");
@@ -114,7 +114,7 @@ public class CardDeliveryOrderFormTest {
     public void shouldShowMassageIfPhoneIsEmpty() {
         String actualDate = dateSetUp(3);
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("Иван Иванович");
         $("[data-test-id=phone] input").setValue("");
@@ -128,7 +128,7 @@ public class CardDeliveryOrderFormTest {
     public void shouldShowMassageIfCheckBoxIsNotCheck() {
         String actualDate = dateSetUp(3);
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("Иван Иванович");
         $("[data-test-id=phone] input").setValue("+79173304434");

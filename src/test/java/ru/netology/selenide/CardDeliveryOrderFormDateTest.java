@@ -1,6 +1,8 @@
 package ru.netology.selenide;
 
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.Keys;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import static com.codeborne.selenide.Condition.*;
@@ -26,7 +28,7 @@ public class CardDeliveryOrderFormDateTest {
     public void shouldShowMassageIfDateIsTwoDaysLess() {
         String actualDate = dateSetUp(1);
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("Иванов Иван");
         $("[data-test-id=phone] input").setValue("+70000000000");
@@ -40,7 +42,7 @@ public class CardDeliveryOrderFormDateTest {
     public void shouldShowMassageIfDateIsOneDaysLess() {
         String actualDate = dateSetUp(2);
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue(actualDate);
         $("[data-test-id=name] input").setValue("Иванов Иван");
         $("[data-test-id=phone] input").setValue("+70000000000");
@@ -54,7 +56,7 @@ public class CardDeliveryOrderFormDateTest {
     @Test                                                           // Дата встечи введена некорректно
     public void shouldShowMassageIfDateIsInvalid() {
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=date] input").setValue("18.05.202");
         $("[data-test-id=name] input").setValue("Иванов Иван");
         $("[data-test-id=phone] input").setValue("+70000000000");
@@ -67,7 +69,7 @@ public class CardDeliveryOrderFormDateTest {
     @Test                                                           // Дата встечи не указана
     public void shouldShowMassageIfDateIsEmpty() {
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").sendKeys("\uE009" + "\uE011", "\uE017");
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
         $("[data-test-id=name] input").setValue("Иванов Иван");
         $("[data-test-id=phone] input").setValue("+70000000000");
         $("[data-test-id=agreement]").click();
